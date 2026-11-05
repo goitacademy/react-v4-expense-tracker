@@ -1,0 +1,57 @@
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 40px 0 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* «Personal finance» над заголовком */
+.eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.title {
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.text {
+  max-width: 30em;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* Кнопка «View expenses» з іконкою ArrowRight (size={18}) */
+.actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+/* M7: обгортка картинки для <Image fill sizes="(max-width: 1120px) 50vw, 512px" preload />;
+   512 = (1120 − 2 × 24 відступи − 48 gap) / 2 */
+.imageWrapper {
+  position: relative;
+  flex: 1 1 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.image {
+  object-fit: cover;
+}

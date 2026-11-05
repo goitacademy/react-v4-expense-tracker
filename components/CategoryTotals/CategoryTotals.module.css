@@ -1,0 +1,37 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Іконка ліворуч, праворуч назва над сумою: сума з п'ятьма цифрами вміщується */
+.item {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background-color: var(--color-surface-muted);
+}
+
+/* <Image> іконки категорії, width={32} height={32}, на два рядки */
+.icon {
+  grid-row: span 2;
+  display: block;
+}
+
+/* Довга назва обрізається трьома крапками */
+.name {
+  overflow: hidden;
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-text-secondary);
+}
+
+.amount {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}

@@ -1,0 +1,11 @@
+/* Один вертикальний список в одному блоці; між рядками лінія */
+.list {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
+
+.list > li + li {
+  border-top: 1px solid var(--color-border);
+}

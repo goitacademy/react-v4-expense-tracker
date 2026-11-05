@@ -1,0 +1,9 @@
+/* Обгортка всередині <body> навколо Header, <main> і Footer:
+   займає всю висоту сторінки й має фон теми. */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}

@@ -1,0 +1,4 @@
+/* Корінь: className={`field ${styles.filter}`}; глобальний .field дає колонку, тут тільки ширина в рядку фільтрів */
+.filter {
+  flex: 0 1 220px;
+}

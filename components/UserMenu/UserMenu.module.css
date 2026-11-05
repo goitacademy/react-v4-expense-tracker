@@ -1,0 +1,12 @@
+/* Користувач: email і форма з кнопкою Log out; гість: Log in (buttonGhost) і Sign up (buttonPrimary) */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.email {
+  padding: 0 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}

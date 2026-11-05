@@ -1,0 +1,17 @@
+.link {
+  padding: 8px 2px;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--color-text);
+}
+
+/* Активний пункт: NavLink ставить aria-current="page" */
+.link[aria-current="page"] {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}

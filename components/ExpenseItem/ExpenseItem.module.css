@@ -1,0 +1,53 @@
+/* Увесь рядок — <Link> */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Фон при наведенні тільки для посилання: до уроку «Динамічні маршрути» рядок — <div> і не клікається */
+a.item:hover {
+  color: var(--color-text);
+  background-color: var(--color-hover);
+}
+
+/* Кільце фокусу всередині рядка: .list з overflow: hidden обрізало б його */
+a.item:focus-visible {
+  outline-offset: -2px;
+}
+
+/* <Image> іконки категорії, width={40} height={40} */
+.icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.title {
+  overflow: hidden;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* «Food · 26 Oct 2026» */
+.meta {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.amount {
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}

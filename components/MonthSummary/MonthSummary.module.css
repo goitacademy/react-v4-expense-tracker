@@ -1,0 +1,19 @@
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* «Spent in October 2026» */
+.caption {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.total {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}

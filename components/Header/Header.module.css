@@ -1,0 +1,67 @@
+.header {
+  background-color: var(--color-header);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  max-width: var(--width-page);
+  min-height: 68px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--color-text);
+}
+
+/* Квадрат з іконкою Wallet (size={20}) */
+.logoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-control);
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+/* Пункт навігації у fallback <Suspense>: без активного стану */
+.navFallback {
+  padding: 8px 2px;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* Права частина: ThemeToggle (M7) і UserMenu (M8) */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* UserMenu у fallback <Suspense>: приблизно резервує місце, щоб хедер менше стрибав */
+.userMenuFallback {
+  width: 200px;
+  height: 44px;
+}

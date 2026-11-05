@@ -1,0 +1,23 @@
+/* Корінь: className={`field ${styles.box}`}; глобальний .field дає колонку, тут тільки ширина в рядку фільтрів */
+.box {
+  flex: 1 1 280px;
+}
+
+/* Обгортка поля, щоб іконка Search стала всередині */
+.inputWrapper {
+  position: relative;
+}
+
+/* Іконка Search (size={18}): top = (44 − 18) / 2 */
+.icon {
+  position: absolute;
+  top: 13px;
+  left: 12px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+/* Місце під іконку: 12 (відступ) + 18 (іконка) + 8 */
+.inputWrapper input {
+  padding-left: 38px;
+}

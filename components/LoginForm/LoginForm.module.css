@@ -1,0 +1,39 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
+
+/* h1 «Log in» і текст під ним */
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: 26px;
+}
+
+.text {
+  color: var(--color-text-secondary);
+}
+
+/* Кнопка на всю ширину: className={`button buttonPrimary ${styles.submit}`} */
+.submit {
+  width: 100%;
+}
+
+/* «No account yet? Sign up» */
+.switch {
+  font-size: 14px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}

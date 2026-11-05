@@ -1,0 +1,20 @@
+/* Кнопка тільки з іконкою: Moon у світлій темі, Sun у темній (size={20}).
+   Потрібен aria-label: «Switch to dark theme» або «Switch to light theme». */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  color: var(--color-label);
+  background-color: var(--color-surface);
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: var(--color-text);
+  background-color: var(--color-hover);
+}

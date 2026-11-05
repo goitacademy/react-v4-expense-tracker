@@ -1,0 +1,245 @@
+/* Кольори: світла тема в :root, темна в [data-theme="dark"].
+   У .module.css кольори тільки через var(--…). */
+
+:root {
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f9fafb;
+  --color-header: #ffffff;
+  --color-border: #e4e7ec;
+  --color-border-strong: #d0d5dd;
+  --color-input-border: #7d8796;
+  --color-hover: #eef0f3;
+
+  --color-text: #101828;
+  --color-text-secondary: #475467;
+  --color-text-muted: #5e6a7c;
+  --color-label: #344054;
+  --color-disabled: #98a2b3;
+
+  --color-accent: #1f6f5c;
+  --color-accent-hover: #16503f;
+  --color-on-accent: #ffffff;
+
+  --color-danger: #b42318;
+  --color-danger-soft: #fef3f2;
+  --color-danger-border: #f4b4ae;
+
+  /* Розміри, однакові для обох тем */
+  --width-page: 1120px; /* хедер, футер і <main> */
+  --width-column: 760px; /* список, сторінка витрати, панелі станів */
+  --radius-card: 16px; /* картки й панелі */
+  --radius-control: 10px; /* кнопки й поля */
+}
+
+/* :root:has(…) переносить темну тему на <html>: темніють фон сторінки й скролбар */
+[data-theme="dark"],
+:root:has([data-theme="dark"]) {
+  color-scheme: dark;
+
+  --color-bg: #111418;
+  --color-surface: #191d23;
+  --color-surface-muted: #15191e;
+  --color-header: #15191e;
+  --color-border: #2a3038;
+  --color-border-strong: #343b45;
+  --color-input-border: #68717f;
+  --color-hover: #232830;
+
+  --color-text: #f2f4f7;
+  --color-text-secondary: #a4acb9;
+  --color-text-muted: #8b95a3;
+  --color-label: #d0d5dd;
+  --color-disabled: #667085;
+
+  --color-accent: #5cc8a8;
+  --color-accent-hover: #8fddc5;
+  --color-on-accent: #0b231c;
+
+  --color-danger: #f97066;
+  --color-danger-soft: #3a1d1b;
+  --color-danger-border: #7a2e28;
+}
+
+/* Основа сторінки */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: var(--font-inter, system-ui), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Кнопки. Клас .button + варіант: className="button buttonPrimary".
+   Працює і на <button>, і на <Link>. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.buttonPrimary {
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+}
+
+.buttonPrimary:hover {
+  color: var(--color-on-accent);
+  background-color: var(--color-accent-hover);
+}
+
+.buttonSecondary {
+  color: var(--color-label);
+  background-color: var(--color-surface);
+  border-color: var(--color-border-strong);
+}
+
+.buttonSecondary:hover {
+  color: var(--color-text);
+  background-color: var(--color-hover);
+}
+
+.buttonGhost {
+  color: var(--color-label);
+  background-color: transparent;
+}
+
+.buttonGhost:hover {
+  color: var(--color-text);
+  background-color: var(--color-hover);
+}
+
+.buttonDanger {
+  color: var(--color-danger);
+  background-color: var(--color-surface);
+  border-color: var(--color-danger-border);
+}
+
+.buttonDanger:hover {
+  color: var(--color-danger);
+  background-color: var(--color-danger-soft);
+}
+
+/* «Saving…», «Deleting…», неактивні Previous і Next */
+.button:disabled,
+.button[aria-disabled="true"] {
+  color: var(--color-disabled);
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+/* Поля форм. Помилку поля показує aria-invalid="true" на полі. */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-label);
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-control);
+  font: inherit;
+  font-size: 15px;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.input:focus {
+  border-color: var(--color-accent);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 0;
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.fieldError {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-danger);
+}
+
+/* Загальна помилка форми (setError("root") або { error } з Server Action) */
+.formError {
+  padding: 12px 14px;
+  border-radius: var(--radius-control);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-danger);
+  background-color: var(--color-danger-soft);
+}

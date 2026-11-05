@@ -1,0 +1,30 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
+
+/* «New expense» або «Edit expense» з пропа title */
+.title {
+  font-size: 26px;
+}
+
+/* Date і Category в одному рядку */
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* «Save expense» (button buttonPrimary) і Cancel (<Link className="button buttonGhost">) */
+.actions {
+  display: flex;
+  gap: 12px;
+}

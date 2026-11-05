@@ -1,0 +1,20 @@
+/* <nav>: Previous, «Page 2 of 4», Next.
+   Previous і Next — <Link className="button buttonSecondary">;
+   на першій і останній сторінці — <a className="button buttonSecondary" role="link" aria-disabled="true"> без href. */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.info {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+/* Номер поточної сторінки: <strong> всередині .info */
+.info strong {
+  color: var(--color-text);
+}
