@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import Image from "next/image";
 import type { Expense } from "@/types/expense";
 import { formatAmount } from "@/utils/formatAmount";
 import { formatDate } from "@/utils/formatDate";
@@ -18,6 +19,13 @@ export function ExpenseDetails({ expense }: ExpenseDetailsProps) {
       </Link>
       <article className={styles.card}>
         <div className={styles.header}>
+          <Image
+            className={styles.icon}
+            src={expense.category.iconUrl}
+            alt=""
+            width={56}
+            height={56}
+          />
           <h1 className={styles.title}>{expense.title}</h1>
           <p className={styles.amount}>{formatAmount(expense.amount)}</p>
         </div>

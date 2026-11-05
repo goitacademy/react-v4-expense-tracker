@@ -13,3 +13,16 @@ export type Expense = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type ExpensesResponse = {
+  expenses: Expense[];
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+};
+
+export type ExpenseSummary = {
+  month: string;
+  total: number;
+};
