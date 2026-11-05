@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-3. Отримай токен: відкрий Swagger на `https://expense-tracker-api.goit.study/docs`, виконай `POST /tokens` зі своїм email, створи `.env.local` з `API_URL` і `API_TOKEN`.
+3. Отримай токен: відкрий Swagger на `https://expense-tracker-api.goit.study/docs`, виконай `POST /tokens` зі своїм email, скопіюй `.env.example` у `.env.local` і заповни значення.
 
 Застосунок відкривається за адресою http://localhost:3000.
 
