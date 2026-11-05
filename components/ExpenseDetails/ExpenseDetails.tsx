@@ -1,0 +1,37 @@
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import type { Expense } from "@/types/expense";
+import { formatAmount } from "@/utils/formatAmount";
+import { formatDate } from "@/utils/formatDate";
+import styles from "./ExpenseDetails.module.css";
+
+type ExpenseDetailsProps = {
+  expense: Expense;
+};
+
+export function ExpenseDetails({ expense }: ExpenseDetailsProps) {
+  return (
+    <div className={styles.wrapper}>
+      <Link href="/expenses" className={styles.backLink}>
+        <ChevronLeft size={18} aria-hidden />
+        All expenses
+      </Link>
+      <article className={styles.card}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>{expense.title}</h1>
+          <p className={styles.amount}>{formatAmount(expense.amount)}</p>
+        </div>
+        <dl className={styles.list}>
+          <div>
+            <dt className={styles.term}>Date</dt>
+            <dd className={styles.value}>{formatDate(expense.date)}</dd>
+          </div>
+          <div>
+            <dt className={styles.term}>Category</dt>
+            <dd className={styles.value}>{expense.category.name}</dd>
+          </div>
+        </dl>
+      </article>
+    </div>
+  );
+}

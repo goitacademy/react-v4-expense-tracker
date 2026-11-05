@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Expense } from "@/types/expense";
 import { formatAmount } from "@/utils/formatAmount";
 import { formatDate } from "@/utils/formatDate";
@@ -9,7 +10,7 @@ type ExpenseItemProps = {
 
 export function ExpenseItem({ expense }: ExpenseItemProps) {
   return (
-    <div className={styles.item}>
+    <Link href={`/expenses/${expense.id}`} className={styles.item}>
       <span className={styles.body}>
         <span className={styles.title}>{expense.title}</span>
         <span className={styles.meta}>
@@ -17,6 +18,6 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
         </span>
       </span>
       <span className={styles.amount}>{formatAmount(expense.amount)}</span>
-    </div>
+    </Link>
   );
 }

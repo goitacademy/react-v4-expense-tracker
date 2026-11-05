@@ -54,3 +54,7 @@ export const expenses: Expense[] = [
     updatedAt: "2026-10-12T16:30:00.000Z",
   },
 ];
+
+export function getExpenseById(id: string) {
+  return expenses.find((expense) => expense.id === id);
+}
