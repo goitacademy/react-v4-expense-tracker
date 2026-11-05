@@ -1,6 +1,7 @@
 import type { Expense } from "@/types/expense";
 import { formatAmount } from "@/utils/formatAmount";
 import { formatDate } from "@/utils/formatDate";
+import styles from "./ExpenseItem.module.css";
 
 type ExpenseItemProps = {
   expense: Expense;
@@ -8,12 +9,14 @@ type ExpenseItemProps = {
 
 export function ExpenseItem({ expense }: ExpenseItemProps) {
   return (
-    <div>
-      <p>{expense.title}</p>
-      <p>
-        {expense.category.name} · {formatDate(expense.date)}
-      </p>
-      <p>{formatAmount(expense.amount)}</p>
+    <div className={styles.item}>
+      <span className={styles.body}>
+        <span className={styles.title}>{expense.title}</span>
+        <span className={styles.meta}>
+          {expense.category.name} · {formatDate(expense.date)}
+        </span>
+      </span>
+      <span className={styles.amount}>{formatAmount(expense.amount)}</span>
     </div>
   );
 }
