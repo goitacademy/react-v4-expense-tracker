@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { ExpenseDetails } from "@/components/ExpenseDetails/ExpenseDetails";
 import { getExpenseById } from "@/services/expenses";
 
@@ -8,7 +9,7 @@ export default async function ExpensePage({
   const expense = await getExpenseById(id);
 
   if (!expense) {
-    return <p>Expense not found</p>;
+    notFound();
   }
 
   return <ExpenseDetails expense={expense} />;
