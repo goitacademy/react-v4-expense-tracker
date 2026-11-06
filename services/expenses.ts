@@ -1,11 +1,18 @@
 import type {
   Expense,
   ExpenseSummary,
+  ExpensesQuery,
   ExpensesResponse,
 } from "@/types/expense";
 
-export async function getExpenses() {
-  const res = await fetch(`${process.env.API_URL}/expenses`, {
+export async function getExpenses(query: ExpensesQuery) {
+  const searchParams = new URLSearchParams();
+
+  if (query.search) {
+    searchParams.set("search", query.search);
+  }
+
+  const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`, {
     headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
   });
 

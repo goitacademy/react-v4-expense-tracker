@@ -26,3 +26,7 @@ export type ExpenseSummary = {
   month: string;
   total: number;
 };
+
+export type ExpensesQuery = {
+  search?: string;
+};
