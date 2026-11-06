@@ -1,13 +1,29 @@
 "use client";
 
 import { useId } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import styles from "./SearchBox.module.css";
 
 export function SearchBox() {
   const id = useId();
+  const router = useRouter();
   const searchParams = useSearchParams();
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newParams = new URLSearchParams(searchParams);
+
+    if (event.target.value) {
+      newParams.set("search", event.target.value);
+    } else {
+      newParams.delete("search");
+    }
+
+    const queryString = newParams.toString();
+    router.replace(queryString ? `/expenses?${queryString}` : "/expenses", {
+      scroll: false,
+    });
+  };
 
   return (
     <div className={`field ${styles.box}`}>
@@ -22,6 +38,7 @@ export function SearchBox() {
           type="search"
           placeholder="Search by title"
           defaultValue={searchParams.get("search") ?? ""}
+          onChange={handleChange}
         />
       </div>
     </div>
