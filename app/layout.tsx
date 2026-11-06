@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { Header } from "@/components/Header/Header";
@@ -13,9 +14,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <NuqsAdapter>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </NuqsAdapter>
       </body>
     </html>
   );
