@@ -33,7 +33,12 @@ export type ExpenseSummary = {
   byCategory: CategoryTotal[];
 };
 
+export type ExpenseYears = {
+  years: number[];
+};
+
 export type ExpensesQuery = {
   search?: string;
   category?: string;
+  month?: string;
 };

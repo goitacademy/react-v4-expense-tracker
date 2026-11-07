@@ -1,6 +1,7 @@
 import type {
   Expense,
   ExpenseSummary,
+  ExpenseYears,
   ExpensesQuery,
   ExpensesResponse,
 } from "@/types/expense";
@@ -14,6 +15,10 @@ export async function getExpenses(query: ExpensesQuery) {
 
   if (query.category) {
     searchParams.set("category", query.category);
+  }
+
+  if (query.month) {
+    searchParams.set("month", query.month);
   }
 
   const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`, {
@@ -45,10 +50,19 @@ export async function getExpenseById(id: string) {
   return expense;
 }
 
-export async function getExpenseSummary() {
-  const res = await fetch(`${process.env.API_URL}/expenses/summary`, {
-    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
-  });
+export async function getExpenseSummary(month?: string) {
+  const searchParams = new URLSearchParams();
+
+  if (month) {
+    searchParams.set("month", month);
+  }
+
+  const res = await fetch(
+    `${process.env.API_URL}/expenses/summary?${searchParams}`,
+    {
+      headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
+    },
+  );
 
   if (!res.ok) {
     throw new Error("Failed to load the summary");
@@ -56,4 +70,17 @@ export async function getExpenseSummary() {
 
   const summary: ExpenseSummary = await res.json();
   return summary;
+}
+
+export async function getExpenseYears() {
+  const res = await fetch(`${process.env.API_URL}/expenses/years`, {
+    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to load the years");
+  }
+
+  const data: ExpenseYears = await res.json();
+  return data.years;
 }
