@@ -22,11 +22,18 @@ export type ExpensesResponse = {
   totalPages: number;
 };
 
+export type CategoryTotal = {
+  category: Category;
+  total: number;
+};
+
 export type ExpenseSummary = {
   month: string;
   total: number;
+  byCategory: CategoryTotal[];
 };
 
 export type ExpensesQuery = {
   search?: string;
+  category?: string;
 };

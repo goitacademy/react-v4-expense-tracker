@@ -12,6 +12,10 @@ export async function getExpenses(query: ExpensesQuery) {
     searchParams.set("search", query.search);
   }
 
+  if (query.category) {
+    searchParams.set("category", query.category);
+  }
+
   const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`, {
     headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
   });
