@@ -11,9 +11,14 @@ export function SearchBox() {
     "search",
     parseAsString.withDefault("").withOptions({ shallow: false }),
   );
+  const [, setPage] = useQueryState(
+    "page",
+    parseAsString.withOptions({ shallow: false }),
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value, { limitUrlUpdates: debounce(300) });
+    setPage(null, { limitUrlUpdates: debounce(300) });
   };
 
   return (

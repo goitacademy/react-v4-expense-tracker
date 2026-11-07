@@ -30,15 +30,21 @@ export function MonthFilter({ month, years }: MonthFilterProps) {
     "month",
     parseAsString.withDefault("").withOptions({ shallow: false }),
   );
+  const [, setPage] = useQueryState(
+    "page",
+    parseAsString.withOptions({ shallow: false }),
+  );
   const selectedMonth = monthParam || month;
   const [year, monthNumber] = selectedMonth.split("-");
 
   const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setMonthParam(`${year}-${event.target.value}`);
+    setPage(null);
   };
 
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setMonthParam(`${event.target.value}-${monthNumber}`);
+    setPage(null);
   };
 
   return (

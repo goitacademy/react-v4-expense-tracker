@@ -12,6 +12,7 @@ import { CategoryFilter } from "@/components/CategoryFilter/CategoryFilter";
 import { MonthFilter } from "@/components/MonthFilter/MonthFilter";
 import { CategoryTotals } from "@/components/CategoryTotals/CategoryTotals";
 import { MessagePanel } from "@/components/MessagePanel/MessagePanel";
+import { Pagination } from "@/components/Pagination/Pagination";
 import styles from "./page.module.css";
 
 export default async function ExpensesPage({
@@ -21,13 +22,16 @@ export default async function ExpensesPage({
   const search = getSearchParam(query.search);
   const category = getSearchParam(query.category);
   const month = getSearchParam(query.month);
+  const requestedPage = getSearchParam(query.page);
+  const filters = { search, category, month };
 
-  const [{ expenses }, summary, categories, years] = await Promise.all([
-    getExpenses({ search, category, month }),
-    getExpenseSummary(month),
-    getCategories(),
-    getExpenseYears(),
-  ]);
+  const [{ expenses, page, totalPages }, summary, categories, years] =
+    await Promise.all([
+      getExpenses({ ...filters, page: requestedPage }),
+      getExpenseSummary(month),
+      getCategories(),
+      getExpenseYears(),
+    ]);
 
   return (
     <div className={styles.page}>
@@ -53,6 +57,9 @@ export default async function ExpensesPage({
           text="No expenses for these filters. Try another month or search, or add an expense."
           role="status"
         />
+      )}
+      {expenses.length > 0 && totalPages > 1 && (
+        <Pagination page={page} totalPages={totalPages} filters={filters} />
       )}
     </div>
   );

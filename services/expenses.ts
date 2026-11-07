@@ -21,6 +21,10 @@ export async function getExpenses(query: ExpensesQuery) {
     searchParams.set("month", query.month);
   }
 
+  if (query.page) {
+    searchParams.set("page", query.page);
+  }
+
   const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`, {
     headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
   });

@@ -15,9 +15,14 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
     "category",
     parseAsString.withDefault("").withOptions({ shallow: false }),
   );
+  const [, setPage] = useQueryState(
+    "page",
+    parseAsString.withOptions({ shallow: false }),
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryParam(event.target.value);
+    setPage(null);
   };
 
   return (

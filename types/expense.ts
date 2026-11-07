@@ -41,4 +41,5 @@ export type ExpensesQuery = {
   search?: string;
   category?: string;
   month?: string;
+  page?: string;
 };
