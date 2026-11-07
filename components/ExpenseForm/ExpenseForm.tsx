@@ -25,6 +25,7 @@ export function ExpenseForm({ title, categories, expense }: ExpenseFormProps) {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(expenseFormSchema),
@@ -48,11 +49,11 @@ export function ExpenseForm({ title, categories, expense }: ExpenseFormProps) {
   }, [isNew, reset]);
 
   const handleFormSubmit = async (values: ExpenseFormValues) => {
-    if (expense) {
-      await updateExpenseAction(expense.id, values);
-    } else {
-      await createExpenseAction(values);
-    }
+    const result = expense
+      ? await updateExpenseAction(expense.id, values)
+      : await createExpenseAction(values);
+
+    setError("root", { message: result.error });
   };
 
   return (
@@ -145,6 +146,12 @@ export function ExpenseForm({ title, categories, expense }: ExpenseFormProps) {
           )}
         </div>
       </div>
+
+      {errors.root && (
+        <p className="formError" role="alert">
+          {errors.root.message}
+        </p>
+      )}
 
       <div className={styles.actions}>
         <button

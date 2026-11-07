@@ -7,7 +7,7 @@ import {
   deleteExpense,
   updateExpense,
 } from "@/services/expenses";
-import type { ExpenseFormValues } from "@/schemas/expenses";
+import { expenseFormSchema } from "@/schemas/expenses";
 
 export async function deleteExpenseAction(id: string) {
   await deleteExpense(id);
@@ -16,20 +16,52 @@ export async function deleteExpenseAction(id: string) {
   redirect("/expenses");
 }
 
-export async function createExpenseAction(values: ExpenseFormValues) {
-  await createExpense({ ...values, amount: Math.round(values.amount * 100) });
+export async function createExpenseAction(values: unknown) {
+  const result = expenseFormSchema.safeParse(values);
+
+  if (!result.success) {
+    return { error: "Check the expense fields and try again." };
+  }
+
+  try {
+    await createExpense({
+      ...result.data,
+      amount: Math.round(result.data.amount * 100),
+    });
+  } catch (error) {
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Try again.",
+    };
+  }
+
   revalidatePath("/expenses");
   redirect("/expenses");
 }
 
-export async function updateExpenseAction(
-  id: string,
-  values: ExpenseFormValues,
-) {
-  await updateExpense(id, {
-    ...values,
-    amount: Math.round(values.amount * 100),
-  });
+export async function updateExpenseAction(id: string, values: unknown) {
+  const result = expenseFormSchema.safeParse(values);
+
+  if (!result.success) {
+    return { error: "Check the expense fields and try again." };
+  }
+
+  try {
+    await updateExpense(id, {
+      ...result.data,
+      amount: Math.round(result.data.amount * 100),
+    });
+  } catch (error) {
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Try again.",
+    };
+  }
+
   revalidatePath("/expenses");
   revalidatePath(`/expenses/${id}`);
   redirect(`/expenses/${id}`);

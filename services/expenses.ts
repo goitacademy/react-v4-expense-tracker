@@ -7,6 +7,10 @@ import type {
   ExpensesResponse,
 } from "@/types/expense";
 
+type ErrorResponse = {
+  message?: string;
+};
+
 export async function getExpenses(query: ExpensesQuery) {
   const searchParams = new URLSearchParams();
 
@@ -112,7 +116,10 @@ export async function createExpense(payload: ExpensePayload) {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to create the expense");
+    const errorData: ErrorResponse = await res.json();
+    throw new Error(
+      errorData.message ?? "Could not save the expense. Try again.",
+    );
   }
 }
 
@@ -127,6 +134,9 @@ export async function updateExpense(id: string, payload: ExpensePayload) {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to update the expense");
+    const errorData: ErrorResponse = await res.json();
+    throw new Error(
+      errorData.message ?? "Could not save the expense. Try again.",
+    );
   }
 }
