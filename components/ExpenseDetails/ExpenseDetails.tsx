@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Pencil } from "lucide-react";
 import Image from "next/image";
 import type { Expense } from "@/types/expense";
 import { formatAmount } from "@/utils/formatAmount";
@@ -41,6 +41,13 @@ export function ExpenseDetails({ expense }: ExpenseDetailsProps) {
           </div>
         </dl>
         <div className={styles.actions}>
+          <Link
+            className="button buttonSecondary"
+            href={`/expenses/${expense.id}/edit`}
+          >
+            <Pencil size={18} aria-hidden />
+            Edit
+          </Link>
           <DeleteButton expenseId={expense.id} />
         </div>
       </article>

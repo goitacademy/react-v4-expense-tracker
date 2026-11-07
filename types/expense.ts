@@ -43,3 +43,10 @@ export type ExpensesQuery = {
   month?: string;
   page?: string;
 };
+
+export type ExpensePayload = {
+  title: string;
+  amount: number;
+  date: string;
+  categoryId: string;
+};

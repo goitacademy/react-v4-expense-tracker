@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 import { ExpenseList } from "@/components/ExpenseList/ExpenseList";
 import {
   getExpenses,
@@ -21,6 +23,10 @@ export default function ExpensesPage({ searchParams }: PageProps<"/expenses">) {
     <div className={styles.page}>
       <div className={styles.headingRow}>
         <h1>Expenses</h1>
+        <Link className="button buttonPrimary" href="/expenses/new">
+          <Plus size={18} aria-hidden />
+          Add expense
+        </Link>
       </div>
       <Suspense fallback={<MessagePanel text="Loading…" role="status" />}>
         <ExpensesContent searchParams={searchParams} />
@@ -67,7 +73,11 @@ async function ExpensesContent({ searchParams }: ExpensesContentProps) {
           title="No expenses found"
           text="No expenses for these filters. Try another month or search, or add an expense."
           role="status"
-        />
+        >
+          <Link className="button buttonPrimary" href="/expenses/new">
+            Add expense
+          </Link>
+        </MessagePanel>
       )}
       {expenses.length > 0 && totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} filters={filters} />

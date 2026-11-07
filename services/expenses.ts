@@ -3,6 +3,7 @@ import type {
   ExpenseSummary,
   ExpenseYears,
   ExpensesQuery,
+  ExpensePayload,
   ExpensesResponse,
 } from "@/types/expense";
 
@@ -97,5 +98,35 @@ export async function deleteExpense(id: string) {
 
   if (!res.ok) {
     throw new Error("Failed to delete the expense");
+  }
+}
+
+export async function createExpense(payload: ExpensePayload) {
+  const res = await fetch(`${process.env.API_URL}/expenses`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to create the expense");
+  }
+}
+
+export async function updateExpense(id: string, payload: ExpensePayload) {
+  const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to update the expense");
   }
 }
