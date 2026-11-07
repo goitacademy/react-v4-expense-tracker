@@ -88,3 +88,14 @@ export async function getExpenseYears() {
   const data: ExpenseYears = await res.json();
   return data.years;
 }
+
+export async function deleteExpense(id: string) {
+  const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete the expense");
+  }
+}

@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { Expense } from "@/types/expense";
 import { formatAmount } from "@/utils/formatAmount";
 import { formatDate } from "@/utils/formatDate";
+import { DeleteButton } from "@/components/DeleteButton/DeleteButton";
 import styles from "./ExpenseDetails.module.css";
 
 type ExpenseDetailsProps = {
@@ -39,6 +40,9 @@ export function ExpenseDetails({ expense }: ExpenseDetailsProps) {
             <dd className={styles.value}>{expense.category.name}</dd>
           </div>
         </dl>
+        <div className={styles.actions}>
+          <DeleteButton expenseId={expense.id} />
+        </div>
       </article>
     </div>
   );
