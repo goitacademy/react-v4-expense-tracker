@@ -1,6 +1,10 @@
+import { cacheLife } from "next/cache";
 import type { Category } from "@/types/expense";
 
 export async function getCategories() {
+  "use cache";
+  cacheLife("hours");
+
   const res = await fetch(`${process.env.API_URL}/categories`, {
     headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
   });
