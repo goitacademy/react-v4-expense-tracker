@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { ExpenseList } from "@/components/ExpenseList/ExpenseList";
 import {
   getExpenses,
@@ -15,9 +16,22 @@ import { MessagePanel } from "@/components/MessagePanel/MessagePanel";
 import { Pagination } from "@/components/Pagination/Pagination";
 import styles from "./page.module.css";
 
-export default async function ExpensesPage({
-  searchParams,
-}: PageProps<"/expenses">) {
+export default function ExpensesPage({ searchParams }: PageProps<"/expenses">) {
+  return (
+    <div className={styles.page}>
+      <div className={styles.headingRow}>
+        <h1>Expenses</h1>
+      </div>
+      <Suspense fallback={<MessagePanel text="Loading…" role="status" />}>
+        <ExpensesContent searchParams={searchParams} />
+      </Suspense>
+    </div>
+  );
+}
+
+type ExpensesContentProps = Pick<PageProps<"/expenses">, "searchParams">;
+
+async function ExpensesContent({ searchParams }: ExpensesContentProps) {
   const query = await searchParams;
   const search = getSearchParam(query.search);
   const category = getSearchParam(query.category);
@@ -34,10 +48,7 @@ export default async function ExpensesPage({
     ]);
 
   return (
-    <div className={styles.page}>
-      <div className={styles.headingRow}>
-        <h1>Expenses</h1>
-      </div>
+    <>
       <section className={styles.summary}>
         <MonthSummary summary={summary} />
         {summary.byCategory.length > 0 && (
@@ -61,6 +72,6 @@ export default async function ExpensesPage({
       {expenses.length > 0 && totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} filters={filters} />
       )}
-    </div>
+    </>
   );
 }
