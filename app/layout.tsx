@@ -6,7 +6,10 @@ import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
-  title: "Expense Tracker",
+  title: {
+    default: "Expense Tracker",
+    template: "%s · Expense Tracker",
+  },
   description: "Track your monthly expenses",
 };
 

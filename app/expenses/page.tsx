@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import type { Metadata } from "next";
 import { ExpenseList } from "@/components/ExpenseList/ExpenseList";
 import {
   getExpenses,
@@ -17,6 +18,10 @@ import { CategoryTotals } from "@/components/CategoryTotals/CategoryTotals";
 import { MessagePanel } from "@/components/MessagePanel/MessagePanel";
 import { Pagination } from "@/components/Pagination/Pagination";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "Expenses",
+};
 
 export default function ExpensesPage({ searchParams }: PageProps<"/expenses">) {
   return (
