@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -27,6 +28,16 @@ export default function HomePage() {
             <ArrowRight size={18} aria-hidden />
           </Link>
         </div>
+      </div>
+      <div className={styles.imageWrapper}>
+        <Image
+          className={styles.image}
+          src="/hero.jpg"
+          alt="A hand holding a phone with a list of expenses next to a coffee cup, a receipt, and coins"
+          fill
+          sizes="(max-width: 1120px) 50vw, 512px"
+          preload
+        />
       </div>
     </section>
   );
