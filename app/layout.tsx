@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "@wrksz/themes/next";
 import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
-import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 import { ThemeWrapper } from "@/components/ThemeWrapper/ThemeWrapper";
 
 const inter = Inter({
@@ -23,10 +23,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body>
         <NuqsAdapter>
-          <ThemeProvider>
+          <ThemeProvider attribute="data-theme">
             <ThemeWrapper>
               <Header />
               <main>{children}</main>

@@ -1,21 +1,23 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "@/components/ThemeProvider/ThemeProvider";
+import { useTheme } from "@wrksz/themes/client";
+import type { Theme } from "@/types/theme";
 import styles from "./ThemeToggle.module.css";
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
+  const { resolvedTheme, setTheme } = useTheme<Theme>();
+  const isDark = resolvedTheme === "dark";
+  const Icon = isDark ? Sun : Moon;
 
   return (
     <button
       className={styles.toggle}
       type="button"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      onClick={toggleTheme}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {isDark ? <Sun size={20} aria-hidden /> : <Moon size={20} aria-hidden />}
+      {resolvedTheme && <Icon size={20} aria-hidden />}
     </button>
   );
 }
