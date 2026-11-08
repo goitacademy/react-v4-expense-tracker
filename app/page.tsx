@@ -1,6 +1,15 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  openGraph: {
+    title: "Know where your money goes",
+    description:
+      "Write down every expense, sort it by category and see how much you spent this month.",
+  },
+};
 
 export default function HomePage() {
   return (
