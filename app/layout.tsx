@@ -5,6 +5,8 @@ import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
+import { ThemeWrapper } from "@/components/ThemeWrapper/ThemeWrapper";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -24,9 +26,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={inter.variable}>
       <body>
         <NuqsAdapter>
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <ThemeProvider>
+            <ThemeWrapper>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+            </ThemeWrapper>
+          </ThemeProvider>
         </NuqsAdapter>
       </body>
     </html>

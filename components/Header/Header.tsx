@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { Wallet } from "lucide-react";
 import { NavLink } from "@/components/NavLink/NavLink";
+import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -27,6 +28,9 @@ export function Header() {
             <NavLink href="/expenses">Expenses</NavLink>
           </nav>
         </Suspense>
+        <div className={styles.actions}>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
