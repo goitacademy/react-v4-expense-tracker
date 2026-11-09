@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import type {
   Expense,
   ExpenseSummary,
@@ -30,7 +31,10 @@ export async function getExpenses(query: ExpensesQuery) {
     searchParams.set("page", query.page);
   }
 
-  const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`);
+  const cookieStore = await cookies();
+  const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`, {
+    headers: { Cookie: cookieStore.toString() },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to load expenses");
@@ -41,7 +45,10 @@ export async function getExpenses(query: ExpensesQuery) {
 }
 
 export async function getExpenseById(id: string) {
-  const res = await fetch(`${process.env.API_URL}/expenses/${id}`);
+  const cookieStore = await cookies();
+  const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
+    headers: { Cookie: cookieStore.toString() },
+  });
 
   if (res.status === 404) {
     return null;
@@ -62,8 +69,10 @@ export async function getExpenseSummary(month?: string) {
     searchParams.set("month", month);
   }
 
+  const cookieStore = await cookies();
   const res = await fetch(
     `${process.env.API_URL}/expenses/summary?${searchParams}`,
+    { headers: { Cookie: cookieStore.toString() } },
   );
 
   if (!res.ok) {
@@ -75,7 +84,10 @@ export async function getExpenseSummary(month?: string) {
 }
 
 export async function getExpenseYears() {
-  const res = await fetch(`${process.env.API_URL}/expenses/years`);
+  const cookieStore = await cookies();
+  const res = await fetch(`${process.env.API_URL}/expenses/years`, {
+    headers: { Cookie: cookieStore.toString() },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to load the years");
@@ -86,8 +98,10 @@ export async function getExpenseYears() {
 }
 
 export async function deleteExpense(id: string) {
+  const cookieStore = await cookies();
   const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
     method: "DELETE",
+    headers: { Cookie: cookieStore.toString() },
   });
 
   if (!res.ok) {
@@ -96,9 +110,13 @@ export async function deleteExpense(id: string) {
 }
 
 export async function createExpense(payload: ExpensePayload) {
+  const cookieStore = await cookies();
   const res = await fetch(`${process.env.API_URL}/expenses`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
     body: JSON.stringify(payload),
   });
 
@@ -111,9 +129,13 @@ export async function createExpense(payload: ExpensePayload) {
 }
 
 export async function updateExpense(id: string, payload: ExpensePayload) {
+  const cookieStore = await cookies();
   const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
     body: JSON.stringify(payload),
   });
 
