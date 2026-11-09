@@ -5,9 +5,7 @@ export async function getCategories() {
   "use cache";
   cacheLife("hours");
 
-  const res = await fetch(`${process.env.API_URL}/categories`, {
-    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
-  });
+  const res = await fetch(`${process.env.API_URL}/categories`);
 
   if (!res.ok) {
     throw new Error("Failed to load categories");

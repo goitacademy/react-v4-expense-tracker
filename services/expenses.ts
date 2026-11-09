@@ -30,9 +30,7 @@ export async function getExpenses(query: ExpensesQuery) {
     searchParams.set("page", query.page);
   }
 
-  const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`, {
-    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
-  });
+  const res = await fetch(`${process.env.API_URL}/expenses?${searchParams}`);
 
   if (!res.ok) {
     throw new Error("Failed to load expenses");
@@ -43,9 +41,7 @@ export async function getExpenses(query: ExpensesQuery) {
 }
 
 export async function getExpenseById(id: string) {
-  const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
-    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
-  });
+  const res = await fetch(`${process.env.API_URL}/expenses/${id}`);
 
   if (res.status === 404) {
     return null;
@@ -68,9 +64,6 @@ export async function getExpenseSummary(month?: string) {
 
   const res = await fetch(
     `${process.env.API_URL}/expenses/summary?${searchParams}`,
-    {
-      headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
-    },
   );
 
   if (!res.ok) {
@@ -82,9 +75,7 @@ export async function getExpenseSummary(month?: string) {
 }
 
 export async function getExpenseYears() {
-  const res = await fetch(`${process.env.API_URL}/expenses/years`, {
-    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
-  });
+  const res = await fetch(`${process.env.API_URL}/expenses/years`);
 
   if (!res.ok) {
     throw new Error("Failed to load the years");
@@ -97,7 +88,6 @@ export async function getExpenseYears() {
 export async function deleteExpense(id: string) {
   const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
   });
 
   if (!res.ok) {
@@ -108,10 +98,7 @@ export async function deleteExpense(id: string) {
 export async function createExpense(payload: ExpensePayload) {
   const res = await fetch(`${process.env.API_URL}/expenses`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
 
@@ -126,10 +113,7 @@ export async function createExpense(payload: ExpensePayload) {
 export async function updateExpense(id: string, payload: ExpensePayload) {
   const res = await fetch(`${process.env.API_URL}/expenses/${id}`, {
     method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${process.env.API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
 
