@@ -30,3 +30,18 @@ export async function registerUser(values: AuthFormValues) {
 
   return getSession(res);
 }
+
+export async function loginUser(values: AuthFormValues) {
+  const res = await fetch(`${process.env.API_URL}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  });
+
+  if (!res.ok) {
+    const errorData: ErrorResponse = await res.json();
+    throw new Error(errorData.message ?? "Could not log in. Try again.");
+  }
+
+  return getSession(res);
+}
