@@ -1,0 +1,32 @@
+import { parseSetCookie } from "set-cookie-parser";
+import type { AuthFormValues } from "@/schemas/auth";
+import type { Session } from "@/types/session";
+
+type ErrorResponse = {
+  message?: string;
+};
+
+function getSession(res: Response): Session {
+  const cookie = parseSetCookie(res, { map: true }).session;
+
+  if (!cookie) {
+    throw new Error("Could not start a session. Try again.");
+  }
+
+  return { value: cookie.value, maxAge: cookie.maxAge };
+}
+
+export async function registerUser(values: AuthFormValues) {
+  const res = await fetch(`${process.env.API_URL}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  });
+
+  if (!res.ok) {
+    const errorData: ErrorResponse = await res.json();
+    throw new Error(errorData.message ?? "Could not sign up. Try again.");
+  }
+
+  return getSession(res);
+}
