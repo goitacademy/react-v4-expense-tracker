@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { parseSetCookie } from "set-cookie-parser";
 import type { AuthFormValues } from "@/schemas/auth";
 import type { Session } from "@/types/session";
@@ -44,4 +45,16 @@ export async function loginUser(values: AuthFormValues) {
   }
 
   return getSession(res);
+}
+
+export async function logoutUser() {
+  const cookieStore = await cookies();
+  const res = await fetch(`${process.env.API_URL}/auth/logout`, {
+    method: "POST",
+    headers: { Cookie: cookieStore.toString() },
+  });
+
+  if (!res.ok) {
+    throw new Error("Could not log out. Try again.");
+  }
 }

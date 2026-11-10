@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { logoutAction } from "@/actions/auth";
 import { getCurrentUser } from "@/services/users";
 import styles from "./UserMenu.module.css";
 
@@ -21,6 +22,11 @@ export async function UserMenu() {
   return (
     <div className={styles.menu}>
       <span className={styles.email}>{user.email}</span>
+      <form action={logoutAction}>
+        <button className="button buttonGhost" type="submit">
+          Log out
+        </button>
+      </form>
     </div>
   );
 }

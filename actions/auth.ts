@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { authFormSchema } from "@/schemas/auth";
-import { loginUser, registerUser } from "@/services/auth";
+import { loginUser, logoutUser, registerUser } from "@/services/auth";
 import type { Session } from "@/types/session";
 
 async function saveSession(session: Session) {
@@ -58,4 +58,13 @@ export async function loginAction(values: unknown) {
   }
 
   redirect("/expenses");
+}
+
+export async function logoutAction() {
+  await logoutUser();
+
+  const cookieStore = await cookies();
+  cookieStore.delete("session");
+
+  redirect("/login");
 }
