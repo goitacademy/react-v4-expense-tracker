@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Wallet } from "lucide-react";
 import { NavLink } from "@/components/NavLink/NavLink";
 import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
+import { UserMenu } from "@/components/UserMenu/UserMenu";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -30,6 +31,9 @@ export function Header() {
         </Suspense>
         <div className={styles.actions}>
           <ThemeToggle />
+          <Suspense fallback={<div className={styles.userMenuFallback} />}>
+            <UserMenu />
+          </Suspense>
         </div>
       </div>
     </header>
